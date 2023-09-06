@@ -8,7 +8,7 @@ import { FaPhotoVideo } from "react-icons/fa";
 
 const iconStyle = (Icon) => <Icon size="3rem" />;
 
-export const featureData = [
+export const featuresData = [
   {
     name: "UI/UX",
     description:
