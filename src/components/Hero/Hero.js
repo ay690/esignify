@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FiMail } from "react-icons/fi";
 import {
   HeroSection,
@@ -13,9 +13,21 @@ import {
   CharacterContainer,
 } from "./HeroStyles";
 import { useInView } from "react-intersection-observer";
+import Modal from "../Modal/Modal";
 
 const Hero = () => {
+  const [showModal, setShowModal] = useState(false);
   const dragConstraints = { top: 0, bottom: 0, right: 0, left: 0 };
+
+  const toggleModal = () => {
+    if (!showModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+
+    setShowModal(!showModal);
+  };
 
   const variants = {
     hover: {
@@ -67,17 +79,21 @@ const Hero = () => {
           </HeroText>
           <ButtonContainer ref={ref}>
             <ButtonWrapper>
-              <HeroButton className={inView ? "" : "corner"}>
+              <HeroButton
+                onClick={toggleModal}
+                className={inView ? "" : "corner"}
+              >
                 {inView ? (
                   <> Chat with us</>
                 ) : (
-                  <FiMail color="white" size="2.4rem" />
+                  <FiMail color="white" size="2.3rem" />
                 )}
               </HeroButton>
             </ButtonWrapper>
           </ButtonContainer>
         </HeroContent>
       </HeroSection>
+      <Modal showModal={showModal} toggleModal={toggleModal} />
     </>
   );
 };
